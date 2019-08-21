@@ -1,8 +1,6 @@
-
-class Card 
-
-    attr_reader :value, :suit
-
+class Card
+    attr_accessor :value, :suit
+    
     def initialize(value, suit)
         @value = value
         @suit = suit
@@ -11,16 +9,16 @@ class Card
 end 
 
 RSpec.describe Card do
-    before do 
-        @card = Card.new('Ace', 'Spades')
-    end 
+    let(:card) { Card.new('Ace', 'Spades') }
 
-    it 'has a value' do 
-        expect(@card.value).to eq('Ace')
+    it 'has a value that can change' do 
+        expect(card.value).to eq('Ace')
+        card.value = 'Queen'
+        expect(card.value).to eq('Queen')
     end
 
     it 'has a suit' do
-        expect(@card.suit).to eq('Spades')
+        expect(card.suit).to eq('Spades')
     end
 end
 
