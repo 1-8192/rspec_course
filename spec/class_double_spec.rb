@@ -15,6 +15,10 @@ end
 
 RSpec.describe CardGame do 
     it 'can only implement class methods that are defined on a class' do 
-        class_double(Deck)
+        deck_class = class_double(Deck, build: ['Ace', "Queen"]).as_stubbed_const
+
+        expect(deck_class).to receive(:build)
+        subject.start
+        expect(subject.cards).to eq(['Ace', 'Queen'])
     end 
 end 
