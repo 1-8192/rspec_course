@@ -1,41 +1,39 @@
-RSpec.shared_examples 'Ruby object with 3 elements' do 
+RSpec.shared_examples 'A Ruby object with 4 elements' do 
     it 'returns the number of items' do 
-        expect(subject.length).to eq(3)
-    end 
+        expect(subject.size).to eq(4)
+    end
 end 
 
 RSpec.describe Array do
-    subject { [1, 2, 3] }
-    include_examples 'Ruby object with 3 elements'
+    subject { [1, 2, 3,] }
+    it 'returns the number of items' do 
+        expect(subject.size).to eq(3)
+    end 
 end
 
 RSpec.describe String do
-    subject { 'abc' }
-    include_examples 'Ruby object with 3 elements'
+    subject { "123" }
+    it 'returns the number of items' do 
+        expect(subject.size).to eq(3)
+    end 
 end
 
 RSpec.describe Hash do
     subject { {a: 1, b: 2, c: 3} }
-    include_examples 'Ruby object with 3 elements'
+    it 'returns the number of items' do 
+        expect(subject.size).to eq(3)
+    end 
 end
 
-class SausageLink 
-    def length 
+class NewThing 
+    def size
         3
     end 
 end 
 
-RSpec.describe SausageLink do 
+RSpec.describe NewThing do 
     subject { described_class.new }
-    include_examples 'Ruby object with 3 elements'
-end 
-
-RSpec.describe Array do 
-    subject { [1, 2] }
-
-    it 'should be equal to [1, 2]' do 
-        expect(subject).to eq([1,2])
+    it 'returns the number of items' do 
+        expect(subject.size).to eq(3)
     end 
-
-    it { is_expected.to eq([1,2]) } 
-end
+end 

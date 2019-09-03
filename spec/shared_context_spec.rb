@@ -1,29 +1,40 @@
 RSpec.shared_context 'common' do 
     before do 
-        @foods = [] 
+        @people = [ "James Baldwin", "William F. Buckley" ] 
     end
 
-    def some_helper_method 
-        5
+    def helper_method 
+        "This works"
     end 
 
-    let(:some_variable) { [1,2,3] }
+    let(:variable) { "This isn't real" }
 end
 
-RSpec.describe 'first example group' do 
+RSpec.describe 'example group' do 
     include_context 'common'
 
-    it 'can use outside instance varibales' do 
-        expect(@foods.length).to eq(0)
-        @foods << 'sushi'
-        expect(@foods.length).to eq(1)
+    it 'can use instance variables' do 
+        @people.pop
+        expect(@people).to eq(["James Baldwin"])
     end
 
-    it 'can reuse instance variables across different examples' do 
-        expect(@foods.length).to eq(0)
+    it 'can use instance variables across different examples' do 
+        expect(@people.length).to eq(2)
     end
 
     it 'can use shared helper methods' do 
-        expect(some_helper_method).to eq(5)
+        expect(helper_method).to eq("This works")
     end
+
+    it 'can use regular vaiables too' do
+        expect(variable).to eq("This isn't real") 
+    end 
+end 
+
+RSpec.describe 'second example group' do 
+    include_context 'common'
+
+    it 'can also be used in different example groups' do 
+        expect(helper_method).to eq("This works")
+    end 
 end 
